@@ -1,8 +1,18 @@
-run:
+run-go:
 	go run src/main.go
 
-build:
+build-go:
 	go build -o bin/main src/main.go
 
-test:
+test-go:
 	go test
+
+run-js:
+	yarn --cwd js run start
+
+build-js:
+	yarn --cwd js run build
+
+dev: run-go run-js
+
+build: build-go build-js
