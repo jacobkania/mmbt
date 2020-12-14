@@ -1,10 +1,11 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
-    /* ... */
+	  pub: '/',
+	  src: '/dist',
   },
   plugins: [
-	  '@snowpack/plugin-svelte'
+	  '@snowpack/plugin-svelte',
   ],
   install: [
     /* ... */
