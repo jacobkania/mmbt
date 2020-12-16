@@ -19,3 +19,6 @@ js/**/.build
 js/**/build
 js/**/web_modules
 js/node_modules
+
+# yarn/npm
+js/node_modules/

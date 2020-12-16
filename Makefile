@@ -5,7 +5,7 @@ build-go:
 	go build -o bin/main src/main.go
 
 test-go:
-	go test
+	go test ./src
 
 run-js:
 	yarn --cwd js run start
@@ -16,3 +16,5 @@ build-js:
 dev: run-go run-js
 
 build: build-go build-js
+
+test: test-go
