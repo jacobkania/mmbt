@@ -1,16 +1,26 @@
 <script>
+  import { Router, Link, Route } from "svelte-navigator";
+  import Home from "./pages/home/Home.svelte";
+  import Overview from "./pages/overview/Overview.svelte";
+  import TopNav from "./components/nav/TopNav.svelte";
 </script>
+
 <style>
+  .main {
+    height: 100vh;
+    margin: 0 auto;
+    background-color: #ccc;
+  }
 </style>
-<div class="App">
-  <header class="App-header">
-    <a
-      class="App-link"
-      href="https://svelte.dev"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Learn Svelte
-    </a>
-  </header>
-</div>
+
+<Router>
+  <div class="main" id="main">
+    <TopNav />
+    <div>
+      <Route path="/">
+        <Home />
+      </Route>
+      <Route path="overview" component={Overview} />
+    </div>
+  </div>
+</Router>
