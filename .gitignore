@@ -8,17 +8,15 @@
 # Test binary, built with `go test -c`
 *.test
 
-# Dependency directories (remove the comment below to include it)
-vendor/
-
-# Local binaries
-bin/
-
 # Snowpack
 js/**/.build
 js/**/build
 js/**/web_modules
 js/node_modules
 
-# yarn/npm
+# yarn
 js/node_modules/
+
+# config
+.env.local
+mmbt.db

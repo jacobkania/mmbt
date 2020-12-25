@@ -9,7 +9,6 @@
   .main {
     height: 100vh;
     margin: 0 auto;
-    background-color: #ccc;
   }
 </style>
 
@@ -20,7 +19,9 @@
       <Route path="/">
         <Home />
       </Route>
-      <Route path="overview" component={Overview} />
+      <Route path="overview">
+        <Overview />
+      </Route>
     </div>
   </div>
 </Router>

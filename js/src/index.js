@@ -14,4 +14,3 @@ if (import.meta.hot) {
     app.$destroy();
   });
 }
-
