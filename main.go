@@ -12,10 +12,10 @@ import (
 
 func main() {
 	log.Println("--   MMBT Starting   --")
+	log.Println("--  (c) Jacob Kania  --")
 	log.Println("-----------------------")
-	log.Println("-- (c) Jacob Kania")
-	log.Println("-- MIT License: free to use and redistribute")
-	log.Println("-- see LICENSE file on https://github.com/jacobkania/mmbt")
+	log.Println("MIT License: free to use and redistribute")
+	log.Println("See LICENSE file on https://github.com/jacobkania/mmbt")
 	log.Println("-----------------------")
 
 	config := configuration.LoadConfig()

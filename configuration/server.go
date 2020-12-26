@@ -34,6 +34,7 @@ func (s *Server) Run() error {
 		log.Printf("*** SERVER WILL BE INSECURE ***")
 		log.Printf("*** DO NOT USE IN PRODUCTION ***")
 
+		log.Println("-----------------------")
 		log.Printf("Server starting on HTTP: %v", s.Config.HTTPPort)
 		return s.httpServer.ListenAndServe()
 	}
