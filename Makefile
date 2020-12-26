@@ -1,18 +1,29 @@
 #####################
-#### Utils
+#### Primary Commands
 #####################
 
-create-dev-db-file-if-not-exist:
-	touch -a ./mmbt.db
+init: fetch-dependencies-go fetch-dependencies-js init-dev-db init-bin-db
 
-create-bin-db-file-if-not-exist:
-	touch -a ./bin/mmbt.db
+dev:
+	make run-go & make run-js
+
+build: build-go build-js
+
+test: test-go
+
+start:
+	(cd bin/ && ./mmbt)
+
+bs:  build start
 
 #####################
 #### Single Application Commands
 #####################
 
 # Go
+
+fetch-dependencies-go:
+	go get
 
 run-go:
 	go run main.go
@@ -25,6 +36,9 @@ test-go:
 
 # JS
 
+fetch-dependencies-js:
+	yarn --cwd js
+
 run-js:
 	yarn --cwd js run start
 
@@ -32,17 +46,11 @@ build-js:
 	yarn --cwd js run build
 
 #####################
-#### Primary Commands
+#### Utils
 #####################
 
-dev:
-	make create-db-file-if-not-exist && make run-go & make run-js
+init-dev-db:
+	touch -a ./mmbt.db
 
-build: build-go build-js
-
-test: test-go
-
-start:
-	(cd bin/ && ./mmbt)
-
-bs: create-bin-db-if-not-exist build start
+init-bin-db:
+	touch -a ./bin/mmbt.db
