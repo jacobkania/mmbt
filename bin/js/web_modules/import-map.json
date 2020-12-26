@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "svelte-navigator": "./svelte-navigator.js",
+    "svelte/internal": "./svelte/internal.js"
+  }
+}

@@ -22,13 +22,13 @@ func setRoutes(server *Server) {
 	/* Frontend Routes */
 	if server.Config.Environment == constants.Environment.Development {
 		// Proxy frontend routes to dev server when environment is Development
-		redirectURL, err := url.Parse("http://" + server.Config.Host + ":" + strconv.Itoa(server.Config.DevFrontendPort))
+		redirectURL, err := url.Parse("http://" + server.Config.Host + ":" + strconv.Itoa(server.Config.FrontendFwdPort))
 		if err != nil {
-			log.Panic("Dev Frontend Port env variable must be set when in dev environment")
+			log.Panic("FRONTEND_FWD_PORT env must be set when in dev environment")
 		}
 		handleFrontendDevBuild(r, redirectURL)
 	} else {
-		r.Handle("/{rest:.*}", http.FileServer(http.Dir("./js/build")))
+		r.Handle("/{rest:.*}", http.FileServer(http.Dir("./js")))
 	}
 }
 

@@ -6,11 +6,6 @@ module.exports = {
   },
   plugins: [
     '@snowpack/plugin-svelte',
-    [
-      '@snowpack/plugin-webpack',
-      {
-      }
-    ]
   ],
   install: [
     /* ... */
@@ -24,7 +19,7 @@ module.exports = {
     open: "none"
   },
   buildOptions: {
-    out: "."
+    out: "../bin/js"
   },
   proxy: {
     /* ... */

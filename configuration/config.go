@@ -19,7 +19,7 @@ type Config struct {
 	KeyFilePath  string
 
 	Environment     constants.Constant
-	DevFrontendPort int
+	FrontendFwdPort int
 }
 
 // LoadConfig gets config from .env files or from environment variables
@@ -44,7 +44,7 @@ func LoadConfig() *Config {
 	c.KeyFilePath = os.Getenv("KEY_FILE_PATH")
 
 	c.Environment, _ = constants.Environment.Validate(os.Getenv("ENVIRONMENT"))
-	c.DevFrontendPort, _ = strconv.Atoi(os.Getenv("DEV_FRONTEND_PORT"))
+	c.FrontendFwdPort, _ = strconv.Atoi(os.Getenv("FRONTEND_FWD_PORT"))
 
 	return &c
 }
