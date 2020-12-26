@@ -5,7 +5,12 @@ module.exports = {
 	  src: '/dist',
   },
   plugins: [
-	  '@snowpack/plugin-svelte',
+    '@snowpack/plugin-svelte',
+    [
+      '@snowpack/plugin-webpack',
+      {
+      }
+    ]
   ],
   install: [
     /* ... */
@@ -14,10 +19,11 @@ module.exports = {
     /* ... */
   },
   devOptions: {
-    /* ... */
+    port: 3000,
+    output: "stream"
   },
   buildOptions: {
-    /* ... */
+    out: "."
   },
   proxy: {
     /* ... */

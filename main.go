@@ -4,14 +4,19 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/jacobkania/mmbt/src/configuration"
+	"mmbt/configuration"
 
 	"github.com/gorilla/mux"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	log.Println("--MMBT Starting--")
+	log.Println("--   MMBT Starting   --")
+	log.Println("-----------------------")
+	log.Println("-- (c) Jacob Kania")
+	log.Println("-- MIT License: free to use and redistribute")
+	log.Println("-- see LICENSE file on https://github.com/jacobkania/mmbt")
+	log.Println("-----------------------")
 
 	config := configuration.LoadConfig()
 

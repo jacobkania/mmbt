@@ -1,4 +1,4 @@
-module github.com/jacobkania/mmbt/src
+module mmbt
 
 go 1.15
 

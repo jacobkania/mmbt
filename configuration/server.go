@@ -23,7 +23,7 @@ type Server struct {
 // Run initializes and sets the server
 // Before calling this method on a Server, you must first set the Config, Router, and Db dependencies.
 func (s *Server) Run() error {
-	setRoutes(s.Router)
+	setRoutes(s)
 
 	httpURL := ":" + strconv.Itoa(s.Config.HTTPPort)
 	httpsURL := ":" + strconv.Itoa(s.Config.HTTPSPort)

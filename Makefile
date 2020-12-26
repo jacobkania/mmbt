@@ -1,11 +1,11 @@
 run-go:
-	go run src/main.go
+	go run main.go
 
 build-go:
-	go build -o bin/main src/main.go
+	go build -o bin/main main.go
 
 test-go:
-	go test ./src
+	go test
 
 run-js:
 	yarn --cwd js run start
@@ -13,7 +13,12 @@ run-js:
 build-js:
 	yarn --cwd js run build
 
-dev: run-go run-js
+
+
+
+
+dev:
+	make run-go & make run-js
 
 build: build-go build-js
 
