@@ -17,6 +17,8 @@ js/node_modules
 # yarn
 js/node_modules/
 
+# Go
+vendor/
+
 # config
 .env.local
-mmbt.db
