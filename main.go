@@ -1,13 +1,15 @@
 package main
 
 import (
-	"database/sql"
+	"context"
 	"log"
+	"os"
+	"os/signal"
+	"syscall"
 
 	"mmbt/configuration"
 
 	"github.com/gorilla/mux"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
@@ -22,16 +24,26 @@ func main() {
 
 	router := mux.NewRouter()
 
-	db, err := sql.Open("sqlite3", "./mmbt.db")
-	if err != nil {
-		log.Fatalf("Database failed to open")
-	}
+	dbConn := configuration.InitializeDB(config)
+	defer dbConn.Close(context.Background())
+
+	endSig := make(chan os.Signal, 1)
+	signal.Notify(endSig, syscall.SIGTERM)
+	signal.Notify(endSig, syscall.SIGINT)
 
 	server := configuration.Server{
 		Config: config,
 		Router: router,
-		DB:     db,
+		DB:     dbConn,
 	}
 
-	log.Fatal(server.Run())
+	httpServer := server.HTTPServer()
+	go httpServer.ListenAndServe()
+
+	log.Printf("Server started on HTTP: %v\n", config.HTTPPort)
+
+	<-endSig
+
+	log.Println("--   MMBT Stopping   --")
+	httpServer.Shutdown(context.Background())
 }

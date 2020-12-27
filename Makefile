@@ -1,11 +1,15 @@
+include .env
+include .env.local
+export
+
 #####################
 #### Primary Commands
 #####################
 
-init: fetch-dependencies-go fetch-dependencies-js init-dev-db init-bin-db
+init: fetch-dependencies-go fetch-dependencies-js
 
 dev:
-	make run-go & make run-js
+	make run-db-local && make run-go & make run-js
 
 build: build-go build-js
 
@@ -14,7 +18,7 @@ test: test-go
 start:
 	(cd bin/ && ./mmbt)
 
-bs:  build start
+bs:  run-db-local build start
 
 #####################
 #### Single Application Commands
@@ -45,12 +49,26 @@ run-js:
 build-js:
 	yarn --cwd js run build
 
+# Database
+
+new-migration:
+	migrate create -ext sql -dir db/migration -format "20060102030405" $(NAME)
+
+migrate-up:
+	migrate -path db/migration -database $(DB_URL) -verbose up
+
+migrate-last-down:
+	migrate -path db/migration -database $(DB_URL) -verbose down 1
+
+migrate-drop:
+	migrate -path db/migration -database $(DB_URL) -verbose drop
+
+run-db-local:
+	brew services start postgres
+
+stop-db-local:
+	brew services stop postgres
+
 #####################
 #### Utils
 #####################
-
-init-dev-db:
-	touch -a ./mmbt.db
-
-init-bin-db:
-	touch -a ./bin/mmbt.db
