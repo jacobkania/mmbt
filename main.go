@@ -27,8 +27,7 @@ func main() {
 	dbConn := configuration.InitializeDB(config)
 
 	endSig := make(chan os.Signal, 1)
-	signal.Notify(endSig, syscall.SIGTERM)
-	signal.Notify(endSig, syscall.SIGINT)
+	signal.Notify(endSig, syscall.SIGTERM, syscall.SIGINT)
 
 	server := configuration.Server{
 		Config: config,

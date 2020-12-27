@@ -1,6 +1,5 @@
 include .env
 include .env.local
-export
 
 #####################
 #### Primary Commands
