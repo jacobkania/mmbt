@@ -25,7 +25,6 @@ func main() {
 	router := mux.NewRouter()
 
 	dbConn := configuration.InitializeDB(config)
-	defer dbConn.Close(context.Background())
 
 	endSig := make(chan os.Signal, 1)
 	signal.Notify(endSig, syscall.SIGTERM)
@@ -46,4 +45,5 @@ func main() {
 
 	log.Println("--   MMBT Stopping   --")
 	httpServer.Shutdown(context.Background())
+	dbConn.Close(context.Background())
 }
