@@ -1,5 +1,6 @@
 <script>
   import { Link } from "svelte-navigator";
+  import Button from "@smui/button";
 </script>
 
 <style>
@@ -15,16 +16,15 @@
     justify-content: space-between;
     width: 20rem;
   }
-
-  .link {
-    background-color: green;
-    color: white;
-  }
 </style>
 
 <div class="topNav">
   <div class="link-container">
-    <Link to="/"><span class="link">Home</span></Link>
-    <Link to="/overview"><span class="link">Overview</span></Link>
+    <Link to="/">
+      <Button>Home</Button>
+    </Link>
+    <Link to="/overview">
+      <Button>Overview</Button>
+    </Link>
   </div>
 </div>

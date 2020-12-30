@@ -1,13 +1,18 @@
 {
   "scripts": {
     "start": "snowpack dev",
+    "reload-theme": "snowpack dev --reload",
     "build": "snowpack build"
   },
   "devDependencies": {
+    "rollup-plugin-postcss": "^4.0.0",
+    "sass": "^1.32.0",
     "snowpack": "^2.18.4"
   },
   "dependencies": {
     "@snowpack/plugin-svelte": "^3.4.0",
+    "postcss": "^8.2.2",
+    "rollup-plugin-svelte": "^7.0.0",
     "svelte": "^3.31.0",
     "svelte-material-ui": "^1.1.0",
     "svelte-navigator": "^3.1.4"

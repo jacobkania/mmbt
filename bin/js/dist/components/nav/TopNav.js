@@ -13,45 +13,131 @@ import {
 	mount_component,
 	safe_not_equal,
 	space,
+	text,
 	transition_in,
 	transition_out
 } from "../../../web_modules/svelte/internal.js";
 
 import { Link } from "../../../web_modules/svelte-navigator.js";
+import Button from "../../../web_modules/@smui/button.js";
 
-function create_default_slot_1(ctx) {
-	let span;
+function create_default_slot_3(ctx) {
+	let t;
 
 	return {
 		c() {
-			span = element("span");
-			span.textContent = "Home";
-			attr(span, "class", "link svelte-w13mqq");
+			t = text("Home");
 		},
 		m(target, anchor) {
-			insert(target, span, anchor);
+			insert(target, t, anchor);
 		},
 		d(detaching) {
-			if (detaching) detach(span);
+			if (detaching) detach(t);
 		}
 	};
 }
 
-// (28:4) <Link to="/overview">
-function create_default_slot(ctx) {
-	let span;
+// (23:4) <Link to="/">
+function create_default_slot_2(ctx) {
+	let button;
+	let current;
+
+	button = new Button({
+			props: {
+				$$slots: { default: [create_default_slot_3] },
+				$$scope: { ctx }
+			}
+		});
 
 	return {
 		c() {
-			span = element("span");
-			span.textContent = "Overview";
-			attr(span, "class", "link svelte-w13mqq");
+			create_component(button.$$.fragment);
 		},
 		m(target, anchor) {
-			insert(target, span, anchor);
+			mount_component(button, target, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const button_changes = {};
+
+			if (dirty & /*$$scope*/ 1) {
+				button_changes.$$scope = { dirty, ctx };
+			}
+
+			button.$set(button_changes);
+		},
+		i(local) {
+			if (current) return;
+			transition_in(button.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(button.$$.fragment, local);
+			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(span);
+			destroy_component(button, detaching);
+		}
+	};
+}
+
+// (27:6) <Button>
+function create_default_slot_1(ctx) {
+	let t;
+
+	return {
+		c() {
+			t = text("Overview");
+		},
+		m(target, anchor) {
+			insert(target, t, anchor);
+		},
+		d(detaching) {
+			if (detaching) detach(t);
+		}
+	};
+}
+
+// (26:4) <Link to="/overview">
+function create_default_slot(ctx) {
+	let button;
+	let current;
+
+	button = new Button({
+			props: {
+				$$slots: { default: [create_default_slot_1] },
+				$$scope: { ctx }
+			}
+		});
+
+	return {
+		c() {
+			create_component(button.$$.fragment);
+		},
+		m(target, anchor) {
+			mount_component(button, target, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const button_changes = {};
+
+			if (dirty & /*$$scope*/ 1) {
+				button_changes.$$scope = { dirty, ctx };
+			}
+
+			button.$set(button_changes);
+		},
+		i(local) {
+			if (current) return;
+			transition_in(button.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(button.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			destroy_component(button, detaching);
 		}
 	};
 }
@@ -67,7 +153,7 @@ function create_fragment(ctx) {
 	link0 = new Link({
 			props: {
 				to: "/",
-				$$slots: { default: [create_default_slot_1] },
+				$$slots: { default: [create_default_slot_2] },
 				$$scope: { ctx }
 			}
 		});
@@ -87,8 +173,8 @@ function create_fragment(ctx) {
 			create_component(link0.$$.fragment);
 			t = space();
 			create_component(link1.$$.fragment);
-			attr(div0, "class", "link-container svelte-w13mqq");
-			attr(div1, "class", "topNav svelte-w13mqq");
+			attr(div0, "class", "link-container svelte-5cqdw1");
+			attr(div1, "class", "topNav svelte-5cqdw1");
 		},
 		m(target, anchor) {
 			insert(target, div1, anchor);

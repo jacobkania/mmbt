@@ -11,7 +11,23 @@ module.exports = {
     /* ... */
   ],
   installOptions: {
-    /* ... */
+    rollup: {
+      plugins: [
+        require("rollup-plugin-svelte")({
+          include: ["./node_modules"],
+        }),
+        require("rollup-plugin-postcss")({
+          use: [
+            [
+              "sass",
+              {
+                includePaths: [".", "./node_modules"],
+              },
+            ],
+          ],
+        }),
+      ],
+    },
   },
   devOptions: {
     port: 3000,

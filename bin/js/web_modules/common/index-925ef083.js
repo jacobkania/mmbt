@@ -89,6 +89,9 @@ function compute_rest_props(props, keys) {
             rest[k] = props[k];
     return rest;
 }
+function action_destroyer(action_result) {
+    return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
+}
 
 function append(target, node) {
     target.appendChild(node);
@@ -193,6 +196,15 @@ function setContext(key, context) {
 }
 function getContext(key) {
     return get_current_component().$$.context.get(key);
+}
+// TODO figure out if we still want to support
+// shorthand events, or if we want to implement
+// a real bubbling mechanism
+function bubble(component, event) {
+    const callbacks = component.$$.callbacks[event.type];
+    if (callbacks) {
+        callbacks.slice().forEach(fn => fn(event));
+    }
 }
 
 const dirty_components = [];
@@ -461,4 +473,4 @@ class SvelteComponent {
     }
 }
 
-export { create_component as A, mount_component as B, destroy_component as C, group_outros as D, check_outros as E, compute_rest_props as F, onDestroy as G, assign as H, exclude_internal_props as I, get_spread_update as J, get_spread_object as K, set_attributes as L, listen as M, createEventDispatcher as N, SvelteComponent as S, subscribe as a, init as b, create_slot as c, text as d, element as e, attr as f, get_store_value as g, insert as h, is_function as i, append as j, set_data as k, detach as l, space as m, noop as n, empty as o, set_style as p, transition_in as q, run_all as r, safe_not_equal as s, tick as t, update_slot as u, transition_out as v, getContext as w, component_subscribe as x, onMount as y, setContext as z };
+export { listen as A, bubble as B, noop as C, subscribe as D, tick as E, get_store_value as F, text as G, attr as H, append as I, set_data as J, space as K, set_style as L, component_subscribe as M, onMount as N, compute_rest_props as O, onDestroy as P, createEventDispatcher as Q, SvelteComponent as S, assign as a, set_attributes as b, create_slot as c, insert as d, element as e, action_destroyer as f, get_spread_update as g, is_function as h, init as i, transition_out as j, detach as k, get_current_component as l, exclude_internal_props as m, getContext as n, create_component as o, empty as p, mount_component as q, run_all as r, safe_not_equal as s, transition_in as t, update_slot as u, get_spread_object as v, group_outros as w, destroy_component as x, check_outros as y, setContext as z };
