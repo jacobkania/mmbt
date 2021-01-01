@@ -1,11 +1,20 @@
 // @import "@material/theme/color-palette";
 
-// Svelte Colors!
-$mdc-theme-primary: #111dbe;
-$mdc-theme-secondary: #676778;
-// Other Svelte color: #40b3ff
+$primary: #0e34a0ff;
+$secondary: #63a375ff;
+$highlight: #058ed9ff;
+$accent: #cb429fff;
+$tertiary: #fe5f55ff;
+$error: #c03221ff;
+$text: #343434ff;
+$text-dark: #1d100cff;
+$bright: #f9f9f9ff;
+$white: #ffffff;
 
-$mdc-theme-background: #fff;
-$mdc-theme-surface: #fff;
+// SMUI colors
+$mdc-theme-primary: $primary;
+$mdc-theme-secondary: $secondary;
+$mdc-theme-background: $white;
+$mdc-theme-surface: $bright;
 
-// $mdc-theme-error: $material-color-red-900;
+$mdc-theme-error: $error;

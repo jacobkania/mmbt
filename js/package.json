@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "snowpack dev",
-    "reload-theme": "snowpack dev --reload",
+    "start-reload-theme": "snowpack dev --reload",
     "build": "snowpack build"
   },
   "devDependencies": {

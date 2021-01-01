@@ -48,6 +48,9 @@ run-js:
 build-js:
 	yarn --cwd js run build
 
+run-js-reload:
+	yarn --cwd js run start-reload-theme
+
 # Database
 
 new-migration:
