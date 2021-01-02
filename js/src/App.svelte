@@ -1,5 +1,5 @@
 <script>
-  import { Router, Link, Route } from "svelte-navigator";
+  import { Route } from "tinro";
   import Home from "pages/home/Home.svelte";
   import Overview from "pages/overview/Overview.svelte";
   import TopNav from "components/nav/TopNav.svelte";
@@ -15,16 +15,17 @@
   }
 </style>
 
-<Router>
+<Route>
   <div class="main" id="main">
     <TopNav />
     <div>
       <Route path="/">
         <Home />
       </Route>
-      <Route path="overview">
+      <Route path="/overview">
         <Overview />
       </Route>
+      <Route fallback>NOTHIN</Route>
     </div>
   </div>
-</Router>
+</Route>

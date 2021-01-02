@@ -23,21 +23,6 @@ function safe_not_equal(a, b) {
 function is_empty(obj) {
     return Object.keys(obj).length === 0;
 }
-function subscribe(store, ...callbacks) {
-    if (store == null) {
-        return noop;
-    }
-    const unsub = store.subscribe(...callbacks);
-    return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
-}
-function get_store_value(store) {
-    let value;
-    subscribe(store, _ => value = _)();
-    return value;
-}
-function component_subscribe(component, store, callback) {
-    component.$$.on_destroy.push(subscribe(store, callback));
-}
 function create_slot(definition, ctx, $$scope, fn) {
     if (definition) {
         const slot_ctx = get_slot_context(definition, ctx, $$scope, fn);
@@ -80,14 +65,6 @@ function exclude_internal_props(props) {
         if (k[0] !== '$')
             result[k] = props[k];
     return result;
-}
-function compute_rest_props(props, keys) {
-    const rest = {};
-    keys = new Set(keys);
-    for (const k in props)
-        if (!keys.has(k) && k[0] !== '$')
-            rest[k] = props[k];
-    return rest;
 }
 function action_destroyer(action_result) {
     return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
@@ -153,14 +130,6 @@ function set_data(text, data) {
     if (text.wholeText !== data)
         text.data = data;
 }
-function set_style(node, key, value, important) {
-    node.style.setProperty(key, value, important ? 'important' : '');
-}
-function custom_event(type, detail) {
-    const e = document.createEvent('CustomEvent');
-    e.initCustomEvent(type, false, false, detail);
-    return e;
-}
 
 let current_component;
 function set_current_component(component) {
@@ -173,23 +142,6 @@ function get_current_component() {
 }
 function onMount(fn) {
     get_current_component().$$.on_mount.push(fn);
-}
-function onDestroy(fn) {
-    get_current_component().$$.on_destroy.push(fn);
-}
-function createEventDispatcher() {
-    const component = get_current_component();
-    return (type, detail) => {
-        const callbacks = component.$$.callbacks[type];
-        if (callbacks) {
-            // TODO are there situations where events could be dispatched
-            // in a server (non-DOM) environment?
-            const event = custom_event(type, detail);
-            callbacks.slice().forEach(fn => {
-                fn.call(component, event);
-            });
-        }
-    };
 }
 function setContext(key, context) {
     get_current_component().$$.context.set(key, context);
@@ -473,4 +425,4 @@ class SvelteComponent {
     }
 }
 
-export { listen as A, bubble as B, noop as C, subscribe as D, tick as E, get_store_value as F, text as G, attr as H, append as I, set_data as J, space as K, set_style as L, component_subscribe as M, onMount as N, compute_rest_props as O, onDestroy as P, createEventDispatcher as Q, SvelteComponent as S, assign as a, set_attributes as b, create_slot as c, insert as d, element as e, action_destroyer as f, get_spread_update as g, is_function as h, init as i, transition_out as j, detach as k, get_current_component as l, exclude_internal_props as m, getContext as n, create_component as o, empty as p, mount_component as q, run_all as r, safe_not_equal as s, transition_in as t, update_slot as u, get_spread_object as v, group_outros as w, destroy_component as x, check_outros as y, setContext as z };
+export { listen as A, bubble as B, append as C, attr as D, space as E, text as F, set_data as G, noop as H, onMount as I, tick as J, SvelteComponent as S, assign as a, set_attributes as b, create_slot as c, insert as d, element as e, action_destroyer as f, get_spread_update as g, is_function as h, init as i, transition_out as j, detach as k, get_current_component as l, exclude_internal_props as m, getContext as n, create_component as o, empty as p, mount_component as q, run_all as r, safe_not_equal as s, transition_in as t, update_slot as u, get_spread_object as v, group_outros as w, destroy_component as x, check_outros as y, setContext as z };

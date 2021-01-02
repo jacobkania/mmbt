@@ -1,5 +1,4 @@
 <script>
-  import { Link } from "svelte-navigator";
   import Button from "@smui/button";
 </script>
 
@@ -20,11 +19,7 @@
 
 <div class="topNav">
   <div class="link-container">
-    <Link to="/">
-      <Button>Home</Button>
-    </Link>
-    <Link to="/overview">
-      <Button>Overview</Button>
-    </Link>
+    <Button href="/">Home</Button>
+    <Button href="/overview">Overview</Button>
   </div>
 </div>

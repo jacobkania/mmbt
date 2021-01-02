@@ -36,7 +36,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (15:0) <Card>
+// (14:0) <Card>
 function create_default_slot(ctx) {
 	let t0;
 	let t1;

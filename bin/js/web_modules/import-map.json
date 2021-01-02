@@ -2,7 +2,7 @@
   "imports": {
     "@smui/button": "./@smui/button.js",
     "@smui/card": "./@smui/card.js",
-    "svelte-navigator": "./svelte-navigator.js",
-    "svelte/internal": "./svelte/internal.js"
+    "svelte/internal": "./svelte/internal.js",
+    "tinro": "./tinro.js"
   }
 }

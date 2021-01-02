@@ -13,16 +13,17 @@ import {
 	mount_component,
 	safe_not_equal,
 	space,
+	text,
 	transition_in,
 	transition_out
 } from "../web_modules/svelte/internal.js";
 
-import { Router, Link, Route } from "../web_modules/svelte-navigator.js";
+import { Route } from "../web_modules/tinro.js";
 import Home from "./pages/home/Home.js";
 import Overview from "./pages/overview/Overview.js";
 import TopNav from "./components/nav/TopNav.js";
 
-function create_default_slot_2(ctx) {
+function create_default_slot_3(ctx) {
 	let home;
 	let current;
 	home = new Home({});
@@ -50,8 +51,8 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (22:6) <Route path="overview">
-function create_default_slot_1(ctx) {
+// (21:6) <Route path="/overview">
+function create_default_slot_2(ctx) {
 	let overview;
 	let current;
 	overview = new Overview({});
@@ -79,7 +80,24 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (15:0) <Router>
+// (24:6) <Route fallback>
+function create_default_slot_1(ctx) {
+	let t;
+
+	return {
+		c() {
+			t = text("NOTHIN");
+		},
+		m(target, anchor) {
+			insert(target, t, anchor);
+		},
+		d(detaching) {
+			if (detaching) detach(t);
+		}
+	};
+}
+
+// (14:0) <Route>
 function create_default_slot(ctx) {
 	let div1;
 	let topnav;
@@ -88,20 +106,30 @@ function create_default_slot(ctx) {
 	let route0;
 	let t1;
 	let route1;
+	let t2;
+	let route2;
 	let current;
 	topnav = new TopNav({});
 
 	route0 = new Route({
 			props: {
 				path: "/",
-				$$slots: { default: [create_default_slot_2] },
+				$$slots: { default: [create_default_slot_3] },
 				$$scope: { ctx }
 			}
 		});
 
 	route1 = new Route({
 			props: {
-				path: "overview",
+				path: "/overview",
+				$$slots: { default: [create_default_slot_2] },
+				$$scope: { ctx }
+			}
+		});
+
+	route2 = new Route({
+			props: {
+				fallback: true,
 				$$slots: { default: [create_default_slot_1] },
 				$$scope: { ctx }
 			}
@@ -116,7 +144,9 @@ function create_default_slot(ctx) {
 			create_component(route0.$$.fragment);
 			t1 = space();
 			create_component(route1.$$.fragment);
-			attr(div1, "class", "main svelte-1vmy9sh");
+			t2 = space();
+			create_component(route2.$$.fragment);
+			attr(div1, "class", "main svelte-103jgu9");
 			attr(div1, "id", "main");
 		},
 		m(target, anchor) {
@@ -127,6 +157,8 @@ function create_default_slot(ctx) {
 			mount_component(route0, div0, null);
 			append(div0, t1);
 			mount_component(route1, div0, null);
+			append(div0, t2);
+			mount_component(route2, div0, null);
 			current = true;
 		},
 		p(ctx, dirty) {
@@ -144,18 +176,27 @@ function create_default_slot(ctx) {
 			}
 
 			route1.$set(route1_changes);
+			const route2_changes = {};
+
+			if (dirty & /*$$scope*/ 1) {
+				route2_changes.$$scope = { dirty, ctx };
+			}
+
+			route2.$set(route2_changes);
 		},
 		i(local) {
 			if (current) return;
 			transition_in(topnav.$$.fragment, local);
 			transition_in(route0.$$.fragment, local);
 			transition_in(route1.$$.fragment, local);
+			transition_in(route2.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
 			transition_out(topnav.$$.fragment, local);
 			transition_out(route0.$$.fragment, local);
 			transition_out(route1.$$.fragment, local);
+			transition_out(route2.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
@@ -163,15 +204,16 @@ function create_default_slot(ctx) {
 			destroy_component(topnav);
 			destroy_component(route0);
 			destroy_component(route1);
+			destroy_component(route2);
 		}
 	};
 }
 
 function create_fragment(ctx) {
-	let router;
+	let route;
 	let current;
 
-	router = new Router({
+	route = new Route({
 			props: {
 				$$slots: { default: [create_default_slot] },
 				$$scope: { ctx }
@@ -180,32 +222,32 @@ function create_fragment(ctx) {
 
 	return {
 		c() {
-			create_component(router.$$.fragment);
+			create_component(route.$$.fragment);
 		},
 		m(target, anchor) {
-			mount_component(router, target, anchor);
+			mount_component(route, target, anchor);
 			current = true;
 		},
 		p(ctx, [dirty]) {
-			const router_changes = {};
+			const route_changes = {};
 
 			if (dirty & /*$$scope*/ 1) {
-				router_changes.$$scope = { dirty, ctx };
+				route_changes.$$scope = { dirty, ctx };
 			}
 
-			router.$set(router_changes);
+			route.$set(route_changes);
 		},
 		i(local) {
 			if (current) return;
-			transition_in(router.$$.fragment, local);
+			transition_in(route.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
-			transition_out(router.$$.fragment, local);
+			transition_out(route.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
-			destroy_component(router, detaching);
+			destroy_component(route, detaching);
 		}
 	};
 }

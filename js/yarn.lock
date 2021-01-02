@@ -1520,11 +1520,6 @@ decompress-response@^6.0.0:
   dependencies:
     mimic-response "^3.1.0"
 
-dedent-js@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/dedent-js/-/dedent-js-1.0.1.tgz#bee5fb7c9e727d85dffa24590d10ec1ab1255305"
-  integrity sha1-vuX7fJ5yfYXf+iRZDRDsGrElUwU=
-
 deepmerge@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.2.2.tgz#44d2ea3679b8f4d4ffba33f03d865fc1e7bf4955"
@@ -2328,13 +2323,6 @@ lodash@^4.15.0:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 
-lower-case@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-2.0.2.tgz#6fa237c63dbdc4a82ca0fd882e4722dc5e634e28"
-  integrity sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==
-  dependencies:
-    tslib "^2.0.3"
-
 lowercase-keys@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-2.0.0.tgz#2603e78b7b4b0006cbca2fbcc8a3202558ac9479"
@@ -2482,14 +2470,6 @@ nanoid@^3.1.20:
   version "3.1.20"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.20.tgz#badc263c6b1dcf14b71efaa85f6ab4c1d6cfc788"
   integrity sha512-a1cQNyczgKbLX9jwbS/+d7W8fX/RfgYR7lVWwWOGIPNgK2m0MWvrGF6/m4kk6U3QcFMnZf3RIhL0v2Jgh/0Uxw==
-
-no-case@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/no-case/-/no-case-3.0.4.tgz#d361fd5c9800f558551a8369fc0dcd4662b6124d"
-  integrity sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==
-  dependencies:
-    lower-case "^2.0.2"
-    tslib "^2.0.3"
 
 node-releases@^1.1.67:
   version "1.1.67"
@@ -2682,14 +2662,6 @@ parse5@^3.0.1:
   integrity sha512-rgO9Zg5LLLkfJF9E6CCmXlSE4UVceloys8JrFqCcHloC3usd/kJCyPDwH2SOlzix2j3xaP9sUX3e8+kvkuleAA==
   dependencies:
     "@types/node" "*"
-
-pascal-case@^3.1.1:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/pascal-case/-/pascal-case-3.1.2.tgz#b48e0ef2b98e205e7c1dae747d0b1508237660eb"
-  integrity sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==
-  dependencies:
-    no-case "^3.0.4"
-    tslib "^2.0.3"
 
 path-exists@^4.0.0:
   version "4.0.0"
@@ -3580,13 +3552,6 @@ svelte-material-ui@^1.1.0:
     "@smui/textfield" "1.1.0"
     "@smui/top-app-bar" "1.1.0"
 
-svelte-navigator@^3.1.4:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/svelte-navigator/-/svelte-navigator-3.1.4.tgz#691bc5ebfaf7b729229e6b62f8a9cc60d7dfa70e"
-  integrity sha512-5yPH/fwOGhCZeOF8owdfsTCpDMjE7UagSz0AQ0ynwobI6xNbJISjhx0n2nlXfqrkYGPeuA3afiNJpsOn1pS88g==
-  dependencies:
-    svelte2tsx "^0.1.151"
-
 svelte-preprocess@^4.6.0:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-4.6.1.tgz#a7de4d91b32d5608b6637da960ee81e6089ae276"
@@ -3596,14 +3561,6 @@ svelte-preprocess@^4.6.0:
     "@types/sass" "^1.16.0"
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
-
-svelte2tsx@^0.1.151:
-  version "0.1.155"
-  resolved "https://registry.yarnpkg.com/svelte2tsx/-/svelte2tsx-0.1.155.tgz#59d7b9156374c629031cd8b4202fb1b76e3d12dc"
-  integrity sha512-5LCKapj5BxQS8PaacumLcKgs6pk2Pgaew3BlI2rI2IXh3Y73iLwXUzlYWXRqeQmXi3XCKIuGgsPHJ2yL7JRC9Q==
-  dependencies:
-    dedent-js "^1.0.1"
-    pascal-case "^3.1.1"
 
 svelte@^3.0, svelte@^3.31.0:
   version "3.31.0"
@@ -3651,6 +3608,11 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
+tinro@^0.4.10:
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/tinro/-/tinro-0.4.10.tgz#a930bd7f13ca199adc86bfcc39005143d1e7a6a6"
+  integrity sha512-T11j2TMWQxgGGyNwTl/+H+v3xRV9mCKvwzd7EKaQoZu83/5FTuBq14tDwRQM0bU7kA3o2OwBqZYUlMiNLs/cfg==
+
 to-regex-range@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/to-regex-range/-/to-regex-range-5.0.1.tgz#1648c44aae7c8d988a326018ed72f5b4dd0392e4"
@@ -3662,11 +3624,6 @@ tslib@^1.10.0, tslib@^1.9.3:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
-
-tslib@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
-  integrity sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==
 
 uniq@^1.0.1:
   version "1.0.1"

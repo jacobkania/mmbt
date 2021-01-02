@@ -18,10 +18,9 @@ import {
 	transition_out
 } from "../../../web_modules/svelte/internal.js";
 
-import { Link } from "../../../web_modules/svelte-navigator.js";
 import Button from "../../../web_modules/@smui/button.js";
 
-function create_default_slot_3(ctx) {
+function create_default_slot_1(ctx) {
 	let t;
 
 	return {
@@ -37,52 +36,8 @@ function create_default_slot_3(ctx) {
 	};
 }
 
-// (23:4) <Link to="/">
-function create_default_slot_2(ctx) {
-	let button;
-	let current;
-
-	button = new Button({
-			props: {
-				$$slots: { default: [create_default_slot_3] },
-				$$scope: { ctx }
-			}
-		});
-
-	return {
-		c() {
-			create_component(button.$$.fragment);
-		},
-		m(target, anchor) {
-			mount_component(button, target, anchor);
-			current = true;
-		},
-		p(ctx, dirty) {
-			const button_changes = {};
-
-			if (dirty & /*$$scope*/ 1) {
-				button_changes.$$scope = { dirty, ctx };
-			}
-
-			button.$set(button_changes);
-		},
-		i(local) {
-			if (current) return;
-			transition_in(button.$$.fragment, local);
-			current = true;
-		},
-		o(local) {
-			transition_out(button.$$.fragment, local);
-			current = false;
-		},
-		d(detaching) {
-			destroy_component(button, detaching);
-		}
-	};
-}
-
-// (27:6) <Button>
-function create_default_slot_1(ctx) {
+// (23:4) <Button href="/overview">
+function create_default_slot(ctx) {
 	let t;
 
 	return {
@@ -98,69 +53,25 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (26:4) <Link to="/overview">
-function create_default_slot(ctx) {
-	let button;
+function create_fragment(ctx) {
+	let div1;
+	let div0;
+	let button0;
+	let t;
+	let button1;
 	let current;
 
-	button = new Button({
+	button0 = new Button({
 			props: {
+				href: "/",
 				$$slots: { default: [create_default_slot_1] },
 				$$scope: { ctx }
 			}
 		});
 
-	return {
-		c() {
-			create_component(button.$$.fragment);
-		},
-		m(target, anchor) {
-			mount_component(button, target, anchor);
-			current = true;
-		},
-		p(ctx, dirty) {
-			const button_changes = {};
-
-			if (dirty & /*$$scope*/ 1) {
-				button_changes.$$scope = { dirty, ctx };
-			}
-
-			button.$set(button_changes);
-		},
-		i(local) {
-			if (current) return;
-			transition_in(button.$$.fragment, local);
-			current = true;
-		},
-		o(local) {
-			transition_out(button.$$.fragment, local);
-			current = false;
-		},
-		d(detaching) {
-			destroy_component(button, detaching);
-		}
-	};
-}
-
-function create_fragment(ctx) {
-	let div1;
-	let div0;
-	let link0;
-	let t;
-	let link1;
-	let current;
-
-	link0 = new Link({
+	button1 = new Button({
 			props: {
-				to: "/",
-				$$slots: { default: [create_default_slot_2] },
-				$$scope: { ctx }
-			}
-		});
-
-	link1 = new Link({
-			props: {
-				to: "/overview",
+				href: "/overview",
 				$$slots: { default: [create_default_slot] },
 				$$scope: { ctx }
 			}
@@ -170,51 +81,51 @@ function create_fragment(ctx) {
 		c() {
 			div1 = element("div");
 			div0 = element("div");
-			create_component(link0.$$.fragment);
+			create_component(button0.$$.fragment);
 			t = space();
-			create_component(link1.$$.fragment);
+			create_component(button1.$$.fragment);
 			attr(div0, "class", "link-container svelte-5cqdw1");
 			attr(div1, "class", "topNav svelte-5cqdw1");
 		},
 		m(target, anchor) {
 			insert(target, div1, anchor);
 			append(div1, div0);
-			mount_component(link0, div0, null);
+			mount_component(button0, div0, null);
 			append(div0, t);
-			mount_component(link1, div0, null);
+			mount_component(button1, div0, null);
 			current = true;
 		},
 		p(ctx, [dirty]) {
-			const link0_changes = {};
+			const button0_changes = {};
 
 			if (dirty & /*$$scope*/ 1) {
-				link0_changes.$$scope = { dirty, ctx };
+				button0_changes.$$scope = { dirty, ctx };
 			}
 
-			link0.$set(link0_changes);
-			const link1_changes = {};
+			button0.$set(button0_changes);
+			const button1_changes = {};
 
 			if (dirty & /*$$scope*/ 1) {
-				link1_changes.$$scope = { dirty, ctx };
+				button1_changes.$$scope = { dirty, ctx };
 			}
 
-			link1.$set(link1_changes);
+			button1.$set(button1_changes);
 		},
 		i(local) {
 			if (current) return;
-			transition_in(link0.$$.fragment, local);
-			transition_in(link1.$$.fragment, local);
+			transition_in(button0.$$.fragment, local);
+			transition_in(button1.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
-			transition_out(link0.$$.fragment, local);
-			transition_out(link1.$$.fragment, local);
+			transition_out(button0.$$.fragment, local);
+			transition_out(button1.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
 			if (detaching) detach(div1);
-			destroy_component(link0);
-			destroy_component(link1);
+			destroy_component(button0);
+			destroy_component(button1);
 		}
 	};
 }
