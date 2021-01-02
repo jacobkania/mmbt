@@ -5,7 +5,7 @@ include .env.local
 #### Primary Commands
 #####################
 
-init: fetch-dependencies-go fetch-dependencies-js
+init: fetch-dependencies-go fetch-dependencies-js migrate-up
 
 dev:
 	make run-db-local && make run-go & make run-js

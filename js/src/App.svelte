@@ -17,12 +17,17 @@
     color: $text;
     font-family: "fira", sans-serif;
   }
+
+  .content {
+    margin: 0 $margin;
+    max-width: 1920px;
+  }
 </style>
 
 <Route>
   <div class="main" id="main">
     <TopNav />
-    <div id="content">
+    <div class="content" id="content">
       <Route path="/">
         <Home />
       </Route>

@@ -1,6 +1,4 @@
 <script>
-  import Button from "@smui/button";
-
   import Logo from "app/Logo.svelte";
 </script>
 
@@ -29,7 +27,7 @@
   .link {
     color: $white;
     text-decoration: none;
-    font-family: "titillium";
+    font: $title-font;
     letter-spacing: 1px;
   }
 </style>
