@@ -11,15 +11,11 @@
 <style type="text/scss">
   @import "theme";
 
-  @import "material-icons/iconfont/material-icons.scss";
-  :global(.material-icons) {
-    @include material-icons();
-  }
-
   .main {
-    height: 100vh;
+    min-height: 100vh;
     margin: 0 auto;
     color: $text;
+    background-color: $background;
     font-family: "fira", sans-serif;
   }
 
@@ -28,6 +24,10 @@
     max-width: 1920px;
   }
 </style>
+
+<svelte:head>
+  <link rel="stylesheet" href="" type="text/scss" />
+</svelte:head>
 
 <Route>
   <div class="main" id="main">

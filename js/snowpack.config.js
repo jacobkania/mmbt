@@ -9,10 +9,17 @@ const rollupSass = require("rollup-plugin-postcss")({
     [
       "sass",
       {
+        // These are options for the sass package, from https://www.npmjs.com/package/sass
         includePaths: ["./node_modules", "."],
+        data: `
+          // Copied files manually into the pub/fonts/material-icons folder from node_modules/material-icons/iconfont
+          $material-icons-font-path: 'fonts/material-icons/';
+          @import '~material-icons/iconfont/material-icons.scss';
+        `,
       },
     ],
   ],
+  minimize: true,
 });
 
 module.exports = {

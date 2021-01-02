@@ -3,8 +3,10 @@
 
   import NetWorth from "./components/NetWorth.svelte";
   import Income from "./components/Income.svelte";
-  import MonthlyBudget from "./components/MonthlyBudget.svelte";
-  import SpendingGoals from "./components/SpendingGoals.svelte";
+  import AccountValues from "./components/AccountValues.svelte";
+  import Assets from "./components/Assets.svelte";
+  import Expenses from "./components/Expenses.svelte";
+  import Debts from "./components/Debts.svelte";
 
   let clicked = 0;
 </script>
@@ -25,7 +27,19 @@
       incomes={[{ name: 'Burger Restaurant', cents: 90000 }, { name: 'Carwash', cents: 14000 }]} />
   </Col>
   <Col xs="12" sm="6">
-    <MonthlyBudget
-      budgetItems={[{ name: 'Living expenses', cents: 70000 }, { name: 'Car', cents: 40000 }]} />
+    <AccountValues
+      accounts={[{ name: 'Burger Restaurant', cents: 90000 }, { name: 'Carwash', cents: 14000 }]} />
+  </Col>
+  <Col xs="12" sm="6">
+    <Assets
+      assets={[{ name: 'Burger Restaurant', cents: 90000 }, { name: 'Carwash', cents: 14000 }]} />
+  </Col>
+  <Col xs="12" sm="6">
+    <Expenses
+      expenses={[{ name: 'Living expenses', cents: 70000 }, { name: 'Car', cents: 40000 }]} />
+  </Col>
+  <Col xs="12" sm="6">
+    <Debts
+      debts={[{ name: 'Living expenses', cents: 70000 }, { name: 'Car', cents: 40000 }]} />
   </Col>
 </Row>

@@ -5,7 +5,7 @@
   import { Col, Row } from "components/grid";
   import formatMoney from "utils/formatMoney";
 
-  export let budgetItems = [];
+  export let expenses = [];
 </script>
 
 <style type="text/scss">
@@ -16,8 +16,8 @@
     font-size: 1.2em;
   }
 
-  .budgetAmount {
-    background-color: $tertiary;
+  .expenseAmount {
+    background-color: $money-outgo;
     color: $white;
     border-radius: 0.5em;
     padding: 0.5em;
@@ -28,12 +28,12 @@
   <Content>
     <Row>
       <Col>
-        <h2>Monthly Budget:</h2>
+        <h2>Expenses:</h2>
         <table class="table">
-          {#each budgetItems as item}
+          {#each expenses as item}
             <tr>
               <td>{item.name}</td>
-              <td class="budgetAmount">{formatMoney(item.cents)}</td>
+              <td class="expenseAmount">{formatMoney(item.cents)}</td>
             </tr>
           {:else}
             <div>There's nothing here</div>
