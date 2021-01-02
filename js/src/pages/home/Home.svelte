@@ -5,7 +5,7 @@
   let clicked = 0;
 </script>
 
-<style>
+<style type="text/scss">
 </style>
 
 <Button on:click={() => clicked++} variant="raised" color="primary">

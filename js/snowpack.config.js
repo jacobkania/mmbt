@@ -9,7 +9,7 @@ const rollupSass = require("rollup-plugin-postcss")({
     [
       "sass",
       {
-        includePaths: ["./node_modules"],
+        includePaths: ["./node_modules", "."],
       },
     ],
   ],
@@ -43,6 +43,5 @@ module.exports = {
   alias: {
     components: "./src/components",
     pages: "./src/pages",
-    "@app": "./src",
   },
 };

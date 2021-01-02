@@ -5,10 +5,13 @@
   import TopNav from "components/nav/TopNav.svelte";
 </script>
 
-<style>
+<style type="text/scss">
+  @import "theme";
+
   .main {
     height: 100vh;
     margin: 0 auto;
+    color: $text;
   }
 </style>
 
