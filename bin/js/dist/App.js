@@ -19,11 +19,12 @@ import {
 } from "../web_modules/svelte/internal.js";
 
 import { Route } from "../web_modules/tinro.js";
+import TopNav from "./components/nav/TopNav.js";
 import Home from "./pages/home/Home.js";
 import Overview from "./pages/overview/Overview.js";
-import TopNav from "./components/nav/TopNav.js";
+import NewSnapshot from "./pages/snapshot/new/NewSnapshot.js";
 
-function create_default_slot_3(ctx) {
+function create_default_slot_5(ctx) {
 	let home;
 	let current;
 	home = new Home({});
@@ -51,8 +52,8 @@ function create_default_slot_3(ctx) {
 	};
 }
 
-// (21:6) <Route path="/overview">
-function create_default_slot_2(ctx) {
+// (25:6) <Route path="/overview">
+function create_default_slot_4(ctx) {
 	let overview;
 	let current;
 	overview = new Overview({});
@@ -80,13 +81,87 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (24:6) <Route fallback>
+// (29:8) <Route path="/new">
+function create_default_slot_3(ctx) {
+	let newsnapshot;
+	let current;
+	newsnapshot = new NewSnapshot({});
+
+	return {
+		c() {
+			create_component(newsnapshot.$$.fragment);
+		},
+		m(target, anchor) {
+			mount_component(newsnapshot, target, anchor);
+			current = true;
+		},
+		i(local) {
+			if (current) return;
+			transition_in(newsnapshot.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(newsnapshot.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			destroy_component(newsnapshot, detaching);
+		}
+	};
+}
+
+// (28:6) <Route path="/snapshot/*">
+function create_default_slot_2(ctx) {
+	let route;
+	let current;
+
+	route = new Route({
+			props: {
+				path: "/new",
+				$$slots: { default: [create_default_slot_3] },
+				$$scope: { ctx }
+			}
+		});
+
+	return {
+		c() {
+			create_component(route.$$.fragment);
+		},
+		m(target, anchor) {
+			mount_component(route, target, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const route_changes = {};
+
+			if (dirty & /*$$scope*/ 1) {
+				route_changes.$$scope = { dirty, ctx };
+			}
+
+			route.$set(route_changes);
+		},
+		i(local) {
+			if (current) return;
+			transition_in(route.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(route.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			destroy_component(route, detaching);
+		}
+	};
+}
+
+// (33:6) <Route fallback>
 function create_default_slot_1(ctx) {
 	let t;
 
 	return {
 		c() {
-			t = text("NOTHIN");
+			t = text("Page not found");
 		},
 		m(target, anchor) {
 			insert(target, t, anchor);
@@ -97,7 +172,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (14:0) <Route>
+// (18:0) <Route>
 function create_default_slot(ctx) {
 	let div1;
 	let topnav;
@@ -108,13 +183,15 @@ function create_default_slot(ctx) {
 	let route1;
 	let t2;
 	let route2;
+	let t3;
+	let route3;
 	let current;
 	topnav = new TopNav({});
 
 	route0 = new Route({
 			props: {
 				path: "/",
-				$$slots: { default: [create_default_slot_3] },
+				$$slots: { default: [create_default_slot_5] },
 				$$scope: { ctx }
 			}
 		});
@@ -122,12 +199,20 @@ function create_default_slot(ctx) {
 	route1 = new Route({
 			props: {
 				path: "/overview",
-				$$slots: { default: [create_default_slot_2] },
+				$$slots: { default: [create_default_slot_4] },
 				$$scope: { ctx }
 			}
 		});
 
 	route2 = new Route({
+			props: {
+				path: "/snapshot/*",
+				$$slots: { default: [create_default_slot_2] },
+				$$scope: { ctx }
+			}
+		});
+
+	route3 = new Route({
 			props: {
 				fallback: true,
 				$$slots: { default: [create_default_slot_1] },
@@ -146,7 +231,10 @@ function create_default_slot(ctx) {
 			create_component(route1.$$.fragment);
 			t2 = space();
 			create_component(route2.$$.fragment);
-			attr(div1, "class", "main svelte-103jgu9");
+			t3 = space();
+			create_component(route3.$$.fragment);
+			attr(div0, "id", "content");
+			attr(div1, "class", "main svelte-c0i9g9");
 			attr(div1, "id", "main");
 		},
 		m(target, anchor) {
@@ -159,6 +247,8 @@ function create_default_slot(ctx) {
 			mount_component(route1, div0, null);
 			append(div0, t2);
 			mount_component(route2, div0, null);
+			append(div0, t3);
+			mount_component(route3, div0, null);
 			current = true;
 		},
 		p(ctx, dirty) {
@@ -183,6 +273,13 @@ function create_default_slot(ctx) {
 			}
 
 			route2.$set(route2_changes);
+			const route3_changes = {};
+
+			if (dirty & /*$$scope*/ 1) {
+				route3_changes.$$scope = { dirty, ctx };
+			}
+
+			route3.$set(route3_changes);
 		},
 		i(local) {
 			if (current) return;
@@ -190,6 +287,7 @@ function create_default_slot(ctx) {
 			transition_in(route0.$$.fragment, local);
 			transition_in(route1.$$.fragment, local);
 			transition_in(route2.$$.fragment, local);
+			transition_in(route3.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
@@ -197,6 +295,7 @@ function create_default_slot(ctx) {
 			transition_out(route0.$$.fragment, local);
 			transition_out(route1.$$.fragment, local);
 			transition_out(route2.$$.fragment, local);
+			transition_out(route3.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
@@ -205,6 +304,7 @@ function create_default_slot(ctx) {
 			destroy_component(route0);
 			destroy_component(route1);
 			destroy_component(route2);
+			destroy_component(route3);
 		}
 	};
 }

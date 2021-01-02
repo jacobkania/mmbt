@@ -19,6 +19,9 @@ start:
 
 bs:  run-db-local build start
 
+kill:
+	kill $(lsof -t -i :8080); kill $(lsof -t -i :3000)
+
 #####################
 #### Single Application Commands
 #####################

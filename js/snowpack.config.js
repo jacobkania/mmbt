@@ -43,5 +43,6 @@ module.exports = {
   alias: {
     components: "./src/components",
     pages: "./src/pages",
+    app: "./src",
   },
 };

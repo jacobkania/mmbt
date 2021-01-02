@@ -82,6 +82,9 @@ function detach(node) {
 function element(name) {
     return document.createElement(name);
 }
+function svg_element(name) {
+    return document.createElementNS('http://www.w3.org/2000/svg', name);
+}
 function text(data) {
     return document.createTextNode(data);
 }
@@ -425,4 +428,4 @@ class SvelteComponent {
     }
 }
 
-export { listen as A, bubble as B, append as C, attr as D, space as E, text as F, set_data as G, noop as H, onMount as I, tick as J, SvelteComponent as S, assign as a, set_attributes as b, create_slot as c, insert as d, element as e, action_destroyer as f, get_spread_update as g, is_function as h, init as i, transition_out as j, detach as k, get_current_component as l, exclude_internal_props as m, getContext as n, create_component as o, empty as p, mount_component as q, run_all as r, safe_not_equal as s, transition_in as t, update_slot as u, get_spread_object as v, group_outros as w, destroy_component as x, check_outros as y, setContext as z };
+export { listen as A, bubble as B, append as C, attr as D, space as E, text as F, noop as G, svg_element as H, set_data as I, onMount as J, tick as K, SvelteComponent as S, assign as a, set_attributes as b, create_slot as c, insert as d, element as e, action_destroyer as f, get_spread_update as g, is_function as h, init as i, transition_out as j, detach as k, get_current_component as l, exclude_internal_props as m, getContext as n, create_component as o, empty as p, mount_component as q, run_all as r, safe_not_equal as s, transition_in as t, update_slot as u, get_spread_object as v, group_outros as w, destroy_component as x, check_outros as y, setContext as z };

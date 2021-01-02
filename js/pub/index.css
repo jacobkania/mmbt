@@ -1,5 +1,15 @@
-/* Add CSS styles here! */
+/* Global css styles */
+
+@font-face {
+  font-family: "fira";
+  src: url("/fonts/fira/FiraSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "titillium";
+  src: url("/fonts/titillium/TitilliumWeb-Bold.ttf") format("truetype");
+}
+
 body {
-  font-family: sans-serif;
   margin: 0;
 }
