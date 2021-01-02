@@ -1,8 +1,8 @@
 <script>
   import { Router, Link, Route } from "svelte-navigator";
-  import Home from "./pages/home/Home.svelte";
-  import Overview from "./pages/overview/Overview.svelte";
-  import TopNav from "./components/nav/TopNav.svelte";
+  import Home from "pages/home/Home.svelte";
+  import Overview from "pages/overview/Overview.svelte";
+  import TopNav from "components/nav/TopNav.svelte";
 </script>
 
 <style>

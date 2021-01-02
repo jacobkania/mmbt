@@ -1,46 +1,48 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
+
+const rollupSvelte = require("rollup-plugin-svelte")({
+  include: ["./node_modules"],
+});
+
+const rollupSass = require("rollup-plugin-postcss")({
+  use: [
+    [
+      "sass",
+      {
+        includePaths: ["./node_modules"],
+      },
+    ],
+  ],
+});
+
 module.exports = {
   mount: {
-	  pub: '/',
-	  src: '/dist',
+    pub: "/",
+    src: "/dist",
   },
-  plugins: [
-    '@snowpack/plugin-svelte',
-  ],
+  plugins: ["@snowpack/plugin-svelte"],
   install: [
     /* ... */
   ],
   installOptions: {
     rollup: {
-      plugins: [
-        require("rollup-plugin-svelte")({
-          include: ["./node_modules"],
-        }),
-        require("rollup-plugin-postcss")({
-          use: [
-            [
-              "sass",
-              {
-                includePaths: [".", "./node_modules"],
-              },
-            ],
-          ],
-        }),
-      ],
+      plugins: [rollupSvelte, rollupSass],
     },
   },
   devOptions: {
     port: 3000,
     output: "stream",
-    open: "none"
+    open: "none",
   },
   buildOptions: {
-    out: "../bin/js"
+    out: "../bin/js",
   },
   proxy: {
     /* ... */
   },
   alias: {
-    /* ... */
+    components: "./src/components",
+    pages: "./src/pages",
+    "@app": "./src",
   },
 };

@@ -1,21 +1,5 @@
-import postcss from "rollup-plugin-postcss";
+import { installOptions } from "./snowpack.config";
 
-module.exports = {
-    rollupWrapper: rollup => {
-    rollup.plugins = [
-      ...rollup.plugins, 
-      postcss({
-        // extract: true,
-        minimize: true,
-        use: [
-          ['sass', {
-            includePaths: [
-              './src/theme',
-              './node_modules'
-            ]
-          }]
-        ]
-      })
-    ]
-  }
-}
+export default {
+  plugins: installOptions.rollup.plugins,
+};
