@@ -11,6 +11,11 @@
 <style type="text/scss">
   @import "theme";
 
+  @import "material-icons/iconfont/material-icons.scss";
+  :global(.material-icons) {
+    @include material-icons();
+  }
+
   .main {
     height: 100vh;
     margin: 0 auto;

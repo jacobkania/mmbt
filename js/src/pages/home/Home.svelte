@@ -1,9 +1,10 @@
 <script>
-  import Card from "@smui/card";
-  import Button from "@smui/button";
-
   import { Col, Row } from "components/grid";
+
   import NetWorth from "./components/NetWorth.svelte";
+  import Income from "./components/Income.svelte";
+  import MonthlyBudget from "./components/MonthlyBudget.svelte";
+  import SpendingGoals from "./components/SpendingGoals.svelte";
 
   let clicked = 0;
 </script>
@@ -11,13 +12,20 @@
 <style type="text/scss">
 </style>
 
+<svelte:head>
+  <title>FI Budget | Home</title>
+</svelte:head>
+
 <Row>
   <Col xs="12" sm="6">
     <NetWorth cents="12340000" lastUpdated="2020-01-17T10:23:01Z" />
   </Col>
   <Col xs="12" sm="6">
-    Hello! this will have lots of words to make into a real column. a a a a a
-    Hello! this will have lots of words to make into a real column. Hello! this
-    will have lots of words to make into a real column.
+    <Income
+      incomes={[{ name: 'Burger Restaurant', cents: 90000 }, { name: 'Carwash', cents: 14000 }]} />
+  </Col>
+  <Col xs="12" sm="6">
+    <MonthlyBudget
+      budgetItems={[{ name: 'Living expenses', cents: 70000 }, { name: 'Car', cents: 40000 }]} />
   </Col>
 </Row>

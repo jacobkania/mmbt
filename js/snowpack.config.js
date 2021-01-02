@@ -45,5 +45,6 @@ module.exports = {
     pages: "./src/pages",
     utils: "./src/utils",
     app: "./src",
+    materialIcons: "material-icons/iconfont",
   },
 };
