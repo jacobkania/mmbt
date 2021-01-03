@@ -20,7 +20,10 @@
 
 <Row>
   <Col xs="12" sm="6">
-    <NetWorth cents="12340000" lastUpdated="2020-01-17T10:23:01Z" />
+    <NetWorth
+      cents={12340000}
+      fireGoal={300000000}
+      lastUpdated="2020-01-17T10:23:01Z" />
   </Col>
   <Col xs="12" sm="6">
     <Income

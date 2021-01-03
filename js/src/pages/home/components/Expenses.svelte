@@ -17,7 +17,7 @@
   }
 
   .expenseAmount {
-    background-color: $money-outgo;
+    background-color: $money-planned;
     color: $white;
     border-radius: 0.5em;
     padding: 0.5em;
