@@ -1,26 +1,16 @@
 package db
 
 import (
-	"context"
-	"log"
-
-	"github.com/jackc/pgx/v4"
+	"github.com/go-pg/pg/v10"
 )
 
-var db *pgx.Conn
+// DB is the application database
+var DB *pg.DB
 
 // InitializeDB runs migrations and opens database connection
-func InitializeDB(dbURL string) *pgx.Conn {
-	conn, err := pgx.Connect(context.Background(), dbURL)
-	if err != nil {
-		log.Fatal("Connection to database failed")
-	}
+func InitializeDB(dbURL string) *pg.DB {
+	conn := pg.Connect(&pg.Options{Addr: dbURL})
 
-	db = conn
+	DB = conn
 	return conn
-}
-
-// Query does a query on db
-func Query(s string) (pgx.Rows, error) {
-	return db.Query(context.Background(), s)
 }

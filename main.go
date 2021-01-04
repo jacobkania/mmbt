@@ -3,12 +3,16 @@ package main
 import (
 	"context"
 	"log"
+	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
+	"time"
 
 	"mmbt/configuration"
 	"mmbt/db"
+	"mmbt/handlers"
 
 	"github.com/gorilla/mux"
 )
@@ -21,28 +25,35 @@ func main() {
 	log.Println("See LICENSE file on https://github.com/jacobkania/mmbt")
 	log.Println("-----------------------")
 
-	config := configuration.LoadConfig()
+	configuration.LoadConfig()
+	dbConn := db.InitializeDB(configuration.Config.DbURL)
 
 	router := mux.NewRouter()
-
-	dbConn := db.InitializeDB(config.DbURL)
+	handlers.SetRoutes(router)
 
 	endSig := make(chan os.Signal, 1)
 	signal.Notify(endSig, syscall.SIGTERM, syscall.SIGINT)
 
-	server := configuration.Server{
-		Config: config,
-		Router: router,
-	}
-
-	httpServer := server.HTTPServer()
+	httpServer := getHTTPServer(router)
 	go httpServer.ListenAndServe()
 
-	log.Printf("Server started on HTTP: %v\n", config.HTTPPort)
+	log.Printf("Server started on HTTP: %v\n", configuration.Config.HTTPPort)
 
 	<-endSig
 
 	log.Println("--   MMBT Stopping   --")
 	httpServer.Shutdown(context.Background())
-	dbConn.Close(context.Background())
+	dbConn.Close()
+}
+
+func getHTTPServer(r *mux.Router) *http.Server {
+	serverAddress := ":" + strconv.Itoa(configuration.Config.HTTPPort)
+
+	return &http.Server{
+		Addr:         serverAddress,
+		Handler:      r,
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  120 * time.Second,
+	}
 }
