@@ -1,6 +1,8 @@
 package db
 
 import (
+	"log"
+
 	"github.com/go-pg/pg/v10"
 )
 
@@ -9,7 +11,12 @@ var DB *pg.DB
 
 // InitializeDB runs migrations and opens database connection
 func InitializeDB(dbURL string) *pg.DB {
-	conn := pg.Connect(&pg.Options{Addr: dbURL})
+	opt, err := pg.ParseURL(dbURL)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	conn := pg.Connect(opt)
 
 	DB = conn
 	return conn

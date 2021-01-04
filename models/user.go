@@ -4,18 +4,11 @@ import "time"
 
 // User model
 type User struct {
-	ID           int64
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
-	DeletedAt    time.Time
-	FullName     string
-	PrimaryEmail string
-	Passw        string
-}
-
-// SetAllowedParams only allows publicly accessible params to be set
-func (u *User) SetAllowedParams(req &interface{}) {
-	u.FullName = req.FullName
-	u.PrimaryEmail = req.PrimaryEmail
-	u.Passw = req.Passw
+	ID           int64     `json:"id"`
+	CreatedAt    time.Time `json:"createdAt"`
+	UpdatedAt    time.Time `json:"updatedAt"`
+	DeletedAt    time.Time `json:"deletedAt"`
+	FullName     string    `json:"fullName"`
+	PrimaryEmail string    `json:"primaryEmail"`
+	Passw        string    `json:"-"`
 }

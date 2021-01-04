@@ -17,8 +17,8 @@ import (
 func SetRoutes(r *mux.Router) {
 	/* API Routes */
 
-	r.HandleFunc("/login", core.LoginHandler)
-	r.HandleFunc("/register", core.RegisterAccountHandler)
+	r.HandleFunc("/login", core.LoginHandler).Methods(http.MethodPost)
+	r.HandleFunc("/register", core.RegisterAccountHandler).Methods(http.MethodPost)
 
 	apiV1 := r.PathPrefix("/api/v1").Subrouter()
 	RouterV1(apiV1)
