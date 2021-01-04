@@ -5,8 +5,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/jackc/pgx/v4"
-
 	mux "github.com/gorilla/mux"
 )
 
@@ -14,7 +12,6 @@ import (
 type Server struct {
 	Config *Config
 	Router *mux.Router
-	DB     *pgx.Conn
 }
 
 // HTTPServer gets the http server

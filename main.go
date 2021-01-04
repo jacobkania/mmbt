@@ -8,6 +8,7 @@ import (
 	"syscall"
 
 	"mmbt/configuration"
+	"mmbt/db"
 
 	"github.com/gorilla/mux"
 )
@@ -24,7 +25,7 @@ func main() {
 
 	router := mux.NewRouter()
 
-	dbConn := configuration.InitializeDB(config)
+	dbConn := db.InitializeDB(config.DbURL)
 
 	endSig := make(chan os.Signal, 1)
 	signal.Notify(endSig, syscall.SIGTERM, syscall.SIGINT)
@@ -32,7 +33,6 @@ func main() {
 	server := configuration.Server{
 		Config: config,
 		Router: router,
-		DB:     dbConn,
 	}
 
 	httpServer := server.HTTPServer()

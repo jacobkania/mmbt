@@ -17,9 +17,12 @@ func setRoutes(server *Server) {
 	var r *mux.Router = server.Router
 
 	/* API Routes */
-	r.HandleFunc("/api", handlers.IndexHandler)
+
+	apiV1 := r.PathPrefix("/api/v1").Subrouter()
+	handlers.RouterV1(apiV1)
 
 	/* Frontend Routes */
+
 	if server.Config.Environment == constants.Environment.Development {
 		// Proxy frontend routes to dev server when environment is Development
 		redirectURL, err := url.Parse("http://" + server.Config.Host + ":" + strconv.Itoa(server.Config.FrontendFwdPort))

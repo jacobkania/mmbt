@@ -29,6 +29,8 @@ DROP TYPE IF EXISTS t_account_type RESTRICT;
 
 --------
 
+DROP TABLE IF EXISTS user_login_tokens;
+
 DROP TABLE IF EXISTS users;
 
 --------

@@ -4,28 +4,47 @@ CREATE TABLE IF NOT EXISTS users (
     id                  bigint              NOT NULL GENERATED ALWAYS AS IDENTITY,
     full_name           text                NOT NULL,
     primary_email       text                NOT NULL,
-    passwd              text,
+    passw               text,
     created_at          timestamptz         NOT NULL DEFAULT NOW(),
     updated_at          timestamptz         NOT NULL DEFAULT NOW(),
     deleted_at          timestamptz,
     CONSTRAINT pk_users PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS user_login_tokens (
+    id                  bigint              NOT NULL GENERATED ALWAYS AS IDENTITY,
+    token               text                NOT NULL,
+    user_id             bigint              NOT NULL, -- foreign key
+    created_at          timestamptz         NOT NULL DEFAULT NOW(),
+    updated_at          timestamptz         NOT NULL DEFAULT NOW(),
+    deleted_at          timestamptz,
+    CONSTRAINT pk_user_login_tokens PRIMARY KEY (id),
+    CONSTRAINT fk_user_login_tokens__users
+        FOREIGN KEY(user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+);
+
 ------------------------ Accounts
 
 DROP TYPE IF EXISTS t_account_type RESTRICT;
-CREATE TYPE t_account_type AS ENUM ('savings', 'checking', 'investment', 'debt');
+CREATE TYPE t_account_type AS ENUM ('savings', 'checking', 'investment', 'debt', 'future_purchase', 'group');
 
 CREATE TABLE IF NOT EXISTS financial_accounts (
     id                  bigint              NOT NULL GENERATED ALWAYS AS IDENTITY,
     title               text                NOT NULL,
     cents               bigint,
     account_type        t_account_type      NOT NULL,
+    parent_account_id   bigint, -- foreign key
     user_id             bigint              NOT NULL, -- foreign key
     created_at          timestamptz         NOT NULL DEFAULT NOW(),
     updated_at          timestamptz         NOT NULL DEFAULT NOW(),
     deleted_at          timestamptz,
     CONSTRAINT pk_financial_accounts PRIMARY KEY (id),
+    CONSTRAINT fk_financial_accounts__parent_account
+        FOREIGN KEY(parent_account_id)
+        REFERENCES financial_accounts(id)
+        ON DELETE SET NULL,
     CONSTRAINT fk_financial_accounts__users
         FOREIGN KEY(user_id)
 	    REFERENCES users(id)
@@ -71,8 +90,10 @@ CREATE TABLE IF NOT EXISTS assets_history (
     id                  bigint              NOT NULL GENERATED ALWAYS AS IDENTITY,
     cents_value         bigint,
     annual_appreciation_pct smallint,
-    user_id             bigint              NOT NULL, -- foreign key
+    start_date          timestamptz,
+    end_date          timestamptz,
     asset_id            bigint              NOT NULL, -- foreign key
+    user_id             bigint              NOT NULL, -- foreign key
     created_at          timestamptz         NOT NULL DEFAULT NOW(),
     updated_at          timestamptz         NOT NULL DEFAULT NOW(),
     deleted_at          timestamptz,
@@ -98,12 +119,12 @@ CREATE TABLE IF NOT EXISTS incomes (
     id                  bigint              NOT NULL GENERATED ALWAYS AS IDENTITY,
     title               text                NOT NULL,
     cents               bigint,
-    user_id             bigint              NOT NULL, -- foreign key
-    income_type         t_income_type       NOT NULL,
-    income_freq         t_income_freq       NOT NULL,
     start_date          timestamptz,
     end_date            timestamptz,
+    income_type         t_income_type       NOT NULL,
+    income_freq         t_income_freq       NOT NULL,
     destination_account_id bigint, -- foreign key
+    user_id             bigint              NOT NULL, -- foreign key
     created_at          timestamptz         NOT NULL DEFAULT NOW(),
     updated_at          timestamptz         NOT NULL DEFAULT NOW(),
     deleted_at          timestamptz,
@@ -144,14 +165,14 @@ CREATE TYPE t_expense_type AS ENUM ('variable', 'fixed', 'future');
 CREATE TABLE IF NOT EXISTS expense_items (
     id                  bigint              NOT NULL GENERATED ALWAYS AS IDENTITY,
     title               text                NOT NULL,
-    expense_type        t_expense_type      NOT NULL,
-    money_category_id   bigint              NOT NULL, -- foreign key
-    user_id             bigint              NOT NULL, -- foreign key
     cents               bigint,
+    pct_extra_income    smallint,
     start_date          timestamptz,
     end_date            timestamptz,
-    pct_extra_income    smallint,
+    expense_type        t_expense_type      NOT NULL,
     destination_account_id bigint, -- foreign key
+    money_category_id   bigint              NOT NULL, -- foreign key
+    user_id             bigint              NOT NULL, -- foreign key
     created_at          timestamptz         NOT NULL DEFAULT NOW(),
     updated_at          timestamptz         NOT NULL DEFAULT NOW(),
     deleted_at          timestamptz,
@@ -172,10 +193,12 @@ CREATE TABLE IF NOT EXISTS expense_items (
 
 CREATE TABLE IF NOT EXISTS actual_expenses (
     id                  bigint              NOT NULL GENERATED ALWAYS AS IDENTITY,
+    cents               bigint,
+    budget_period_start timestamptz,
+    budget_period_end   timestamptz,
     money_category_id   bigint              NOT NULL, -- foreign key
     expense_item_id     bigint              NOT NULL, -- foreign key
     user_id             bigint              NOT NULL, -- foreign key
-    cents               bigint,
     created_at          timestamptz         NOT NULL DEFAULT NOW(),
     updated_at          timestamptz         NOT NULL DEFAULT NOW(),
     deleted_at          timestamptz,
@@ -193,5 +216,7 @@ CREATE TABLE IF NOT EXISTS actual_expenses (
 	    REFERENCES users(id)
 	    ON DELETE CASCADE
 );
+
+-------
 
 COMMIT;
