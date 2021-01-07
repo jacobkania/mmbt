@@ -5,6 +5,7 @@ import (
 	"mmbt/configuration"
 	"mmbt/constants"
 	"mmbt/handlers/core"
+	"mmbt/services/auth"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -16,11 +17,13 @@ import (
 // SetRoutes sets all routes on the provided mux router
 func SetRoutes(r *mux.Router) {
 	/* API Routes */
+	r.Use(generalMiddleware)
 
 	r.HandleFunc("/login", core.LoginHandler).Methods(http.MethodPost)
 	r.HandleFunc("/register", core.RegisterAccountHandler).Methods(http.MethodPost)
 
 	apiV1 := r.PathPrefix("/api/v1").Subrouter()
+	apiV1.Use(auth.APIRouteMiddleware)
 	RouterV1(apiV1)
 
 	/* Frontend Routes */
@@ -45,4 +48,12 @@ func handleFrontendDevServer(w http.ResponseWriter, r *http.Request) {
 	r.Header.Set("X-Forwarded-Host", r.Header.Get("Host"))
 
 	proxy.ServeHTTP(w, r)
+}
+
+func generalMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+
+		next.ServeHTTP(w, r)
+	})
 }

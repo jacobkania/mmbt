@@ -3,7 +3,7 @@ BEGIN;
 CREATE TABLE IF NOT EXISTS users (
     id                  bigint              NOT NULL GENERATED ALWAYS AS IDENTITY,
     full_name           text                NOT NULL,
-    primary_email       text                NOT NULL,
+    username            text                NOT NULL UNIQUE,
     passw               text,
     created_at          timestamptz         NOT NULL DEFAULT NOW(),
     updated_at          timestamptz         NOT NULL DEFAULT NOW(),
@@ -11,13 +11,26 @@ CREATE TABLE IF NOT EXISTS users (
     CONSTRAINT pk_users PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS user_login_tokens (
+CREATE TABLE IF NOT EXISTS user_emails (
     id                  bigint              NOT NULL GENERATED ALWAYS AS IDENTITY,
-    token               text                NOT NULL,
+    email               text                NOT NULL UNIQUE,
     user_id             bigint              NOT NULL, -- foreign key
     created_at          timestamptz         NOT NULL DEFAULT NOW(),
     updated_at          timestamptz         NOT NULL DEFAULT NOW(),
     deleted_at          timestamptz,
+    CONSTRAINT pk_user_emails PRIMARY KEY (id),
+    CONSTRAINT fk_user_emails__users
+        FOREIGN KEY(user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS user_login_tokens (
+    id                  bigint              NOT NULL GENERATED ALWAYS AS IDENTITY,
+    token               text                UNIQUE NOT NULL,
+    user_id             bigint              NOT NULL, -- foreign key
+    created_at          timestamptz         NOT NULL DEFAULT NOW(),
+    updated_at          timestamptz         NOT NULL DEFAULT NOW(),
     CONSTRAINT pk_user_login_tokens PRIMARY KEY (id),
     CONSTRAINT fk_user_login_tokens__users
         FOREIGN KEY(user_id)
