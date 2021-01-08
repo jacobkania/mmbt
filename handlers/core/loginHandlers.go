@@ -27,6 +27,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(loginParams)
 
 	if len(loginParams.Passw) < 10 {
+		<-reqTimeEqualizer
 		w.WriteHeader(http.StatusUnauthorized)
 		json.NewEncoder(w).Encode(models.Error{Error: "Incorrect login information"})
 		return

@@ -49,7 +49,9 @@ module.exports = {
   },
   alias: {
     components: "./src/components",
+    models: "./src/models",
     pages: "./src/pages",
+    stores: "./src/stores",
     utils: "./src/utils",
     app: "./src",
     materialIcons: "material-icons/iconfont",

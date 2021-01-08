@@ -1,11 +1,14 @@
 <script>
   import { Route } from "tinro";
 
-  import TopNav from "components/nav/TopNav.svelte";
-
   import Home from "pages/home/Home.svelte";
   import Overview from "pages/overview/Overview.svelte";
   import NewSnapshot from "pages/snapshot/new/NewSnapshot.svelte";
+  import Login from "pages/login/Login.svelte";
+
+  import TopNav from "components/nav/TopNav.svelte";
+
+  import { token } from "stores/tokenStore";
 </script>
 
 <style type="text/scss">
@@ -16,7 +19,6 @@
     margin: 0 auto;
     color: $text;
     background-color: $background;
-    font-family: "fira", sans-serif;
   }
 
   .content {
@@ -29,22 +31,28 @@
   <link rel="stylesheet" href="" type="text/scss" />
 </svelte:head>
 
-<Route>
-  <div class="main" id="main">
-    <TopNav />
-    <div class="content" id="content">
-      <Route path="/">
-        <Home />
-      </Route>
-      <Route path="/overview">
-        <Overview />
-      </Route>
-      <Route path="/snapshot/*">
-        <Route path="/new">
-          <NewSnapshot />
+{#if $token}
+  <Route>
+    <div class="main" id="main">
+      <TopNav />
+      <div class="content" id="content">
+        <Route path="/">
+          <Home />
         </Route>
-      </Route>
-      <Route fallback>Page not found</Route>
+        <Route path="/overview">
+          <Overview />
+        </Route>
+        <Route path="/snapshot/*">
+          <Route path="/new">
+            <NewSnapshot />
+          </Route>
+        </Route>
+        <Route fallback>Page not found</Route>
+      </div>
     </div>
-  </div>
-</Route>
+  </Route>
+{:else}
+  <Route>
+    <Login />
+  </Route>
+{/if}
