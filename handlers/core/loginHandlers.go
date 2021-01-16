@@ -54,7 +54,9 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	// v v v Below here, user is authenticated v v v
 
-	token, err := auth.CreateToken(user)
+	tokenSvc := &auth.TokenService{DB: db.DB}
+
+	token, err := tokenSvc.CreateToken(user)
 
 	if err != nil {
 		<-reqTimeEqualizer

@@ -12,7 +12,7 @@ dev:
 
 build: build-go build-js
 
-test: test-go
+test: run-db-local migrate-test test-go
 
 start:
 	(cd bin/ && ./mmbt)
@@ -38,7 +38,7 @@ build-go:
 	go build -o bin/mmbt main.go
 
 test-go:
-	go test
+	@TEST_DB_URL=$(TEST_DB_URL) go test ./...
 
 # JS
 
@@ -67,6 +67,10 @@ migrate-last-down:
 
 migrate-drop:
 	migrate -path db/migration -database $(DB_URL) -verbose drop
+
+migrate-test:
+	migrate -path db/migration -database $(TEST_DB_URL) -verbose drop -f
+	migrate -path db/migration -database $(TEST_DB_URL) -verbose up
 
 run-db-local:
 	brew services start postgres
