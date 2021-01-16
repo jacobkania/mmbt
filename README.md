@@ -6,7 +6,8 @@ Most Minimal Budgeting Tool
 
 1. Install `postgres` and `golang-migrate` (can `brew install` both)
 2. Create databases within postgres for running locally: `mmbt_dev` and `mmbt_test`
-3. Create user within postgres for running locally: `mmbt_user`
+3. Add .env.local file with req'd environment variables (found in .env)
+4. For debugging, install `delve`.
 
 ## Make commands
 
